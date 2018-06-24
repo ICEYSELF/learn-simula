@@ -1,8 +1,8 @@
-#Chapter 1
+# Chapter 1
 
-##begin at the beginning......
+## begin at the beginning......
 
-###What is a computer program?
+### What is a computer program?
 
 A computer program (program is always spelt in the American way) is a series of instructions which contains all the information necessary for a computer to perform some task. It is similar to a knitting pattern, a recipe or a musical score. Like all of these it uses a special shorthand, known in this case as a programming language.
 This book describes how to write and understand programs written in the language SIMULA. The definition used is the 1985 SIMULA Standard, which extends and clarifies the language previously known as SIMULA 67. The 67 stood for 1967, the year in which this earlier version was first defined.
@@ -40,7 +40,7 @@ Although the programs shown in this book use bothcapital letters, which are know
 So we have to put begin and end. What about the text in between?
 This is made up of instructions to the SIMULA system, which are of two types; DECLARATIONS and STATEMENTS. There are also pieces of the text which are ignored by the SIMULA system and which simply help any human who reads the program to follow what is happening. These are called comments.
 
-###Declarations
+### Declarations
 
 In example 1.1, the first instruction after the word begin is a declaration:
 
@@ -76,7 +76,7 @@ or, alternatively, by writing
                       etc.
 which many people find neater. This style is called a declaration list, with a series of identifiers of locations with the same type separated by commas.
 
-###Comments
+### Comments
 
 The next line is a comment. It begins with the keyword comment, is followed by some text and ends in a semi-colon.
 
@@ -87,7 +87,7 @@ As well as forming lines on their own, comments can also be used in certain plac
 
 When you are writing programs in independent sections, as we will be, you may not look back at a "working" component for some time. It is also possible that someone else may need to change what you have written. The design of the overall system should tell him what the component is supposed to do, but the details of how it works may not be obvious. To help everyone understand your programs, you should include comments in them.
 
-###Statements
+### Statements
 
 The other instructions in our example are all statements. They tell the SIMULA system what it is to do.
 We shall be looking at the different sorts of statements which exist in SIMULA in detail later. For the moment, let us look briefly at those in the example to get a flavour of the possibilities.
@@ -100,7 +100,7 @@ The final statement uses OutImage. Like OutInt, OutImage is a procedure and is a
 
 OutImage causes the line which is currently being created - the current image - to be written to the printer or terminal and a new line to be started. You have probably noticed that it does not have any parentheses or numbers after it. These numbers, known as "parameters", are only present when the procedure needs information from the program to carry out its task.
 
-###What do we do with our program?
+### What do we do with our program?
 
 So now we have what we think is a legal SIMULA program. Unfortunately it is on paper and whilst we know what it should cause to happen, the SIMULA system cannot read from the page. How then do we get the SIMULA system to obey our program?
 The first step is to write our program, known in full as the "source program", in some medium which the computer housing the SIMULA system can manipulate. Older machines may require you to punch the text on paper tape or cards, but today most machines will handle text files. These are stored in the computer's memory on some magnetic medium such as a disk or tape. You can usually create them by typing them into the system using a text editor. You will need to check the documentation for the computer that you intend to use, especially the SIMULA user's guide or programmer's reference manual.
@@ -119,7 +119,7 @@ The final product of compilation and linking is a translation of your original S
 
 Note: The ability to compile and run SIMULA programs depends on having access to a computer with a SIMULA system. If your computer currently does not, you may be able to buy one, but they are not available for all computers. The suppliers of those systems known to the author are listed at the back of this book. If your computer is not listed, write to SIMULA A.S., who may be able to help. Their address is given in the list. Readers in the United Kingdom might wish to contact the author.
 
-###Summary
+### Summary
 
 Each chapter will end with a brief summary of what the author thinks you should have learned from it.
 In this chapter we have looked informally at what a program and a block are. We used a very simple program, made up of only one block to illustrate this.
@@ -132,7 +132,7 @@ Lastly we looked at how to compile and run our program on a computer.
 
 {{ book.Chapter2 }}
 
-###Exercises
+### Exercises
 
 When the author was learning to write programs, he was told the most important rule, "There is no such thing as an armchair programmer". The simplest exercise can often teach even an experienced programmer something new. Avoid the temptation to miss out examples as they will often lead on to the material covered in the next chapter.
 This chapter has introduced a lot of ideas. You may feel completely bewildered. Do not despair. By using the ideas in successive chapters and examples you will soon become familiar with them. To start with try three fundamental, but by no means unimportant, exercises.
