@@ -1,8 +1,8 @@
-#Chapter 13 - Let Us See what We Can See
+# Chapter 13 - Let Us See what We Can See
 
-##Inspection and Remote Accessing
+## Inspection and Remote Accessing
 
-###Recap
+### Recap
 
 So far we have treated inspection and dot notation accessing as the same thing. In most simple cases they are. In other situations they may be used to do rather different things. In particular the inspect statement can be used for much more than just a convenient shorthand.
 Essentially we have seen that the dot notation form of remote accessing allows us to use the attributes of a class object from outside it. It is also used to access the attributes of text objects, which are not class objects.
@@ -57,7 +57,7 @@ b) inspect statement.
                for Int := Int step 2 until 6 do Txt := "Txt"
             end
          end
-###Limitations of dot notation
+### Limitations of dot notation
 
 The most important limitation on dot notation occurs with an object qualified by a class which itself has classes declared within its body or within the body of a prefixing class. This is shown in example 13.2a.
 Class Outside contains a class declaration for Inside and other attributes. The main program contains a variable Outsider which references an object of class Outside. Using dot notation we cannot access any of the attributes of Outsider from the main program block.
@@ -142,7 +142,7 @@ Another problem with remote accessing is that it is clearly nonsense to use a re
 
 To get around these problems we can use extensions of the inspect statement.
 
-###inspect plus otherwise
+### inspect plus otherwise
 
 The simplest extension allows us to detect the use of references which currently do not point to a class object. Such references are said to point to an imaginary object, with no attributes, called None. This is the only object that any reference, regardless of its type, can point at.
 Consider examples 13.3. The first program would simply ignore some elements of the array References, since not all the reference variables in this array have been pointed at objects of class Example. The second program, on the other hand, will detect such variables and report which they are. It does this by adding an otherwise clause to its inspect statement.
@@ -244,7 +244,7 @@ c) The same program without inspect.
             end**of**for**loop
 
          end++of++program
-###The use of inspect plus when
+### The use of inspect plus when
 
 The inspect statement used so far allows us to treat None and one particular type of class object differently. By adding a feature called the when clause, we can treat a class object according to its actual type, out of a range of possible alternatives.
 Example 13.4 shows the use of an inspect statement with when clauses to process a linked list. All the objects on the list belong to classes sharing a common prefix. They are linked by variables declared as ref to this common prefix.
@@ -318,7 +318,7 @@ Example 13.4: Mixed list processing using when.
             end--of--while--loop
 
          end++of++program
-###A practical example - simple sorting and merging
+### A practical example - simple sorting and merging
 
 Example 13.5 shows the use of a when clause to help in processing records which are read in unsorted. The records are of four types and are marked by the contents of their first line. The first character of this line is 'M' for a male and 'F' for a female. The second character is 'A' for an accountant and 'D' for a dancer.
 Input is terminated by a line containing ".end" as its start.
@@ -449,7 +449,7 @@ Example 13.5: Merging and sorting using inspect.
             if Accountants=/=None then Write_List("Accountants",Accountants)
 
          end++of++program
-###Exercise
+### Exercise
 
 13.1 A theatrical agent has a file of records of different kinds of artists. He also has a file of records of requests for artists to be sent for audition. Assume that there are artists who are actors, musicians, singers and comedians and that requests may be for any of these. Further, assume that requests may specify the sex of the required artist and the age, with the age given as child, youth, mature or elderly. Write a program, based on the techniques used in example 13.5, to match requests and artists and print lists of all suitable artists for each request and all suitable requests for each artist.
 Getting round the qualification rules
@@ -499,12 +499,12 @@ Example 13.6: Uses of qua.
       ! c);   ARef2 qua B.I :- Copy("No inside to get to")
 
          end++of++program
-###Syntax and semantics of reference expressions using qua
+### Syntax and semantics of reference expressions using qua
 
 The use of qua is in expressions giving a reference to a class object. Its syntax is any reference to a class object, followed by the keyword qua, followed by the name of a class.
 This group is still a reference to the class object, but it is accessed at the prefix level defined by the class specified. Only the attributes of this class and any prefixes to it may be accessed.
 
-###Referencing yourself
+### Referencing yourself
 
 This chapter has introduced some very powerful concepts, but the usefulness of them is not always immediately apparent. It is only when you have to write quite complex programs that you may appreciate qua, for instance.
 One very useful but much simpler feature in SIMULA is the ability of an object to reference itself. It is achieved by using the keyword this. Example 13.7 shows the use of this.
@@ -641,22 +641,22 @@ Example 13.7: Using this in 13.5.
             if Accountants=/=None then Write_List("Accountants",Accountants)
 
          end++of++program
-###this in inspect statements
+### this in inspect statements
 
 It is important to remember that the statement following the keyword do in a simple inspect and the statements in the when clauses of the extended inspect are treated as if they were inside the body of the object inspected. It is therefore possible to use this in these statements to refer to the inspected object.
-###Reference parameters
+### Reference parameters
 
 We have used references to objects as parameters without really considering the implications. We shall do so briefly here.
 References to class objects may be declared and passed as parameters to both procedures and classes. They are passed to both by reference as a default. They may be passed by name to procedures but not to classes. They may never be passed by value. (See tables 6.1 and 9.1.)
 
 The actual reference passed when the procedure is called or the class object is generated, must be compatible with the class specified in the declaration. This means that its qualification must be equal or inner to the declared class, just as in a reference assignment.
 
-###Exercises
+### Exercises
 
 13.2 Rewrite example 13.7. Add a procedure Into to class linker. This takes one parameter which is a ref(Header). When Into is called it should insert the Linker object into the list of the Header passed. What mode should be used for the parameter?
 13.3 Extend Into in 13.2, giving it a second parameter which is a ref to Linker. When called it should now insert the object through which it is accessed into the list after the object referenced by its second parameter. Beware of None. What modes should be used here?
 
-###Summary
+### Summary
 
 We have examined the uses, advantages and limitations of the dot notation for remote accessing.
 We have seen the full use of the inspect statement in both its simple and extended forms.

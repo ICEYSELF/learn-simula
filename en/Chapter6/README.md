@@ -1,13 +1,13 @@
-#CHAPTER 6 - Correct Procedures
+# CHAPTER 6 - Correct Procedures
 
-###Building blocks
+### Building blocks
 
 We have written some programs which do real work, but at the moment they have to be run separately, with the input provided for each run. It is not obvious how we can use such separate programs to build a large, flexible piece of software.
 One method would be to combine all the small programs that we write into one large program, using each program in the right order. We could use our multiple space removing program, followed by our line breaking program and so on. This is fine for programs that only need to be used in one place, but if the same function is required in several places we will need to duplicate the instructions each time. This is inefficient, making our programs much longer than they need to be. It can also make it tedious to follow the overall working of a large program, since a mass of detailed instructions tend to obscure the important features of the design.
 
 As an example of a program which could be used in many places in our package, we might take the text concatenation program. In fact this is such a useful thing to be able to do that we might wish that a language feature existed for it. In fact, such a facility is now provided as part of SIMULA. Unfortunately, it is not yet available in most systems. We shall see it in chapter 8. Fortunately, we are able to define our own procedures, which we can then use wherever we like inside the block where we declare them. In fact we can even build a library of our favourite procedures and use it in all our programs.
 
-###Declaring procedures
+### Declaring procedures
 
 It is clearly not enough to declare a procedure in the way we declare an integer. The declaration
 
@@ -55,7 +55,7 @@ Example 6.2: Concatenate as a procedure.
                    end;
                    Concatenate
                 end
-###Parameters to procedures
+### Parameters to procedures
 
 This Concatenate procedure only joins texts which are read in by it. Having done so, it merely prints out the result. This would be much more useful if we could use it to combine any two texts in our programs and to assign the result to any text we chose. This can be done by specifying parameters in the declaration.
 We have already seen how parameters can be used to pass values to system procedures. Example 6.3 shows how to declare two texts as parameters to the Concatenate procedure.
@@ -96,7 +96,7 @@ Example 6.4: A procedure with more than one type of parameter.
                    TextAndInt("NUMBER",10)
                 end
 When execution of a procedure is complete all quantities declared inside it are lost. This includes the final values of its parameters. The remaining question is how to get back the text containing the concatenated texts once Concatenate is complete. There are two ways of doing this in SIMULA and the first of these uses a different sort of parameter.
-###Parameter modes
+### Parameter modes
 
 The way of specifying parameters that we have used so far will always work for passing values into a procedure. If we want to get information out, we may have to add a mode specifier for some parameters.
 This sounds confusing, but is easy to follow in practice. Here is a final version of Concatenate.
@@ -142,7 +142,7 @@ A simple type is integer, real, character or Boolean and any long or short varia
 
 Now we can see that name is always legal and reference is the default for all but simple types. Do not worry about the meaning of those types which are new. We shall consider their use when we encounter them.
 
-###Value parameters
+### Value parameters
 
 A value parameter to a procedure acts as if it were a variable of that type declared in the body of the procedure. The value passed to it when the procedure is called is copied into it as part of the call statement. Since values declared inside a block cannot be used outside that block, the value of this mode of parameter is lost on returning from the procedure.
 When calling a procedure, any value of the correct type may be passed to a value mode parameter. Thus constants, expressions and variables are all allowed.
@@ -192,7 +192,7 @@ Example 6.7: Text parameter passed by value.
                    OuterT:-"Here's a line";
                    OutLine(OuterT)
                 end
-###Reference parameters
+### Reference parameters
 
 When a parameter is passed by reference, the local parameter points at the location holding the object passed, rather as if the :- reference assignment operator had been used. No local copy is made of the contents of the object.
 For every reference parameter type except text, this explanation is sufficient and should be reconsidered for its meaning when those types are encountered.
@@ -229,7 +229,7 @@ Example 6.8: Concatenate using only reference mode parameters.
                    OutText(Text3);
                    OutImage
                 end
-###Name parameters
+### Name parameters
 
 Name parameters are very powerful, but complex. It is sometimes possible to make serious errors using them, through failing to consider all possile outcomes of their use.
 When a variable is passed by name, its use within the procedure has the same effect as when that variable is used outside the procedure. Thus any actions on the parameter inside the procedure directly affect the variable passed in the call. This is obviously a suitable mode for getting values back from a procedure, as we have seen.
@@ -287,7 +287,7 @@ Example 6.10: Expressions by name and by value.
 
          Use_Name(OuterVal+3,OuterVal+3)
       end++of++program
-###Exercises
+### Exercises
 
 6.1 Write a program which uses a procedure to find the larger of two numbers and returns it in a name parameter.
 6.2 Write a program which uses our multiple space removal program as a procedure. Devise a series of tests to cover all the cases you can think of which this procedure might have to cope with and try them. Do not use lots of tests which all check the same thing, but try to use one good test for each possibility.
@@ -298,7 +298,7 @@ Example 6.10: Expressions by name and by value.
 
 6.5 Write and test a procedure which counts the number of non-space characters in a text.
 
-###Functions
+### Functions
 
 There is another way to return values from procedures to the calling block. We have already seen examples of system procedures which use this mechanism in GetChar and InInt. Now let us see how to write procedures for ourselves.
 Example 6.11 is an example of such a procedure which adds two numbers together and returns the result. Such a procedure is usually referred to as a "type procedure" or, most commonly, a "function".
@@ -348,7 +348,7 @@ Example 6.12: Concatenate as a text procedure.
              OutText(Concatenate("PART ONE"," PART TWO"));
              OutImage
           end
-###Exercises
+### Exercises
 
 6.6 Write and test a function which returns the amount of tax payable on an income and which takes three parameters - the tax free allowance, the rate of taxation and the amount earned.
 6.7 Use the function to write a program which calculates the tax on a person's income, assuming the following rates.
@@ -374,7 +374,7 @@ Reads in and performs the following commands:
                                one.
                 S - move back to the start of the text.
                 E - end further command processing and print the final text.
-###Recursive procedures
+### Recursive procedures
 
 A procedure must be declared inside a block. Like any other declared item program, it may be used anywhere within that block. This includes using it within blocks and procedures which are also within that block. In a block which has more than one procedure declared within it, any one of these procedures may be called inside any or all of the others, even those which are declared before itself. This is known as the scope of such a declaration.
 This has one rather important implication. A procedure may make a call on itself. This as known as a "recursive" call. 6.13 is an example of a program which uses a recursive procedure call.
@@ -411,12 +411,12 @@ If the character read is a space, Non\_Blank is called again and the text is pas
 showing clearly the two uses of Non_Blank as left side of an assignment, returning the value for the function, and as recursive call, with parameter.
 Try working through for yourself using texts with various numbers of spaces at their start. Once you have seen how it works for a couple of examples you should get the idea.
 
-###Text function results and recursion
+### Text function results and recursion
 
 A text procedure returns a text reference. Thus only reference assignments to the procedure identifier, witthin the procedure body assign a new result. Value assignments merelyalter the contents of the text frame of the currently assigned reference.
 When the procedure identifier occurs on the right hand side of an assignment the effect is independent of whether it is a reference or value assignment. Such an occurence is always taken as a recursive call.
 
-###Dangers of recursion
+### Dangers of recursion
 
 It is not necessary to have a type procedure to use recursion. There are many instances when non-type procedures can use recursion. It is a vey powerful device. Example 6.14 uses a non-type procedure . It shows the power of recursion and the possible problems of using it without proper thought.
 Example 6.14: The danger of non-terminating recursion.
@@ -438,7 +438,7 @@ If you are not sure what is wrong, look carefully at the call on Numbr inside th
 
 In general, recursive calls must only be made as part of an if statement or an if-then-else statement and the condition for their being called must become false at some point. This requires some care, but is no more of a problem than writing while loops which stop at the desired point. In fact recursive calls and while loops are very similar.
 
-###Summary
+### Summary
 
 We have seen how to declare and call simple procedures, with and without parameters.
 We have seen how to specify the types of any parameters to a procedure.
@@ -453,7 +453,7 @@ We have learned how to use simple recursion.
 
 {{ book.Chapter7 }}
 
-###Exercises
+### Exercises
 
 6.11 Use a recursive procedure to write a program which scans a text for a occurences of a sequence of characters and replaces them with another.
 6.12 Use a recursive procedure to write a program which reads in lines of text and prints them out with a line number. Set the program to stop when the line

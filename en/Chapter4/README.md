@@ -1,8 +1,8 @@
-#CHAPTER 4 - if only
+# CHAPTER 4 - if only
 
-##Conditional statements
+## Conditional statements
 
-###What do computers do?
+### What do computers do?
 
 It may seem a little late in this book to ask such a question, but we have really taken for granted what computers are and what they can do. if we are to use them as fully as possible, we need to understand exactly what they are capable of.
 Most people probably used to think of computers as giant, superfast calculating machines. More recently the idea of very small micro-computers has changed that Image somewhat. More importantly, the use of computers in word processing and graphics (particularly computer games) has introduced many more people to the use of computers in information processing and decision making.
@@ -13,14 +13,14 @@ As programmers we can consider computers as performing three sets of functions, 
   2. Arithmetic calculations - we have seen some examples of this already.
   3. Comparison of information and choice of actions depending on the result - this chapter will look at the basic mechanisms for this.
 
-###Conditions and choices
+### Conditions and choices
 
 The ability that makes computers more than calculators or fancy typewriters is the ability to perform different actions according to some condition or conditions, which it can determine to be either true or false. Computers can be told, "Check this condition. If it is true then do the following, otherwise do this other thing". In some cases the other thing is nothing. Put crudely, computers can make choices.
 What they cannot do, or, at least, as far as the author is aware, not yet, is decide which condition to test, or whether the actions which follow are really sensible. They must be told these things and programming languages have mechanisms for doing so.
 
 In SIMULA, the most important construction for making choices is the "conditional statement" or, as it is often known, the if statement.
 
-###What is an if statement?
+### What is an if statement?
 
 Example 4.1: Simple use of an if statement.
                 begin
@@ -41,7 +41,7 @@ The program checks the condition. If it is true, the statement is executed (or c
 
 An if statement may be used wherever a simple statement may be used.
 
-###The if-then-else statement
+### The if-then-else statement
 
 Consider example 4.2 which uses if statements.
 Example 4.2: Un-combined if statements.
@@ -66,12 +66,12 @@ Example 4.3: The if-then-else statement.
                              else OutText("NO");
                    OutImage
                 end
-###A "real" program
+### A "real" program
 
 So far we have used only trivial examples to demonstrate features of SIMULA. None of them has had a purpose apart from that. Although writing and correcting such programs is interesting for a while, it soon becomes boring. We are now going to begin to construct a series of programs which have a very real and very practical purpose. If you complete this book you will have built the basis of a suite of word processing programs, which will allow simple editing and formatting of text files. You may then extend these to provide some very powerful tools. We shall also look at some simple database tools, which will allow you to store and retrieve information efficiently.
 The important thing about writing large programs which perform complex functions is to break the design into sections which perform sub-tasks and which are simple enough to write easily. Our next examples introduce simple programs, although ones which are more complex than those we have seen so far. On its own each is not very useful, but later on we will use it as a building block in our much more powerful programs.
 
-###A "top down" design
+### A "top down" design
 
 Soometimes, in explaining the programs we wish to write, we start from simple components and work towards the whole system. This approach is known as "bottom up" design, for fairly obvious reasons. Where we are only designing a small part of our "grand design" this approach is sufficient. There are not too many components to hold in our heads as we build up the program.
 When the system we are designing gets bigger, this approach is not good enough. It would be very difficult to write down now all the parts of our formatting and editing system in this kind of detail, especially as we have not said exactly what we want the system to do. It is much more sensible to start at the highest level, with our overall system, and break this down step by step until we reach components which are simple enough to write in SIMULA in detail. This approach is called "top down" design.
@@ -108,10 +108,10 @@ We shall fill in other branches as we learn more of SIMULA's capabilities. In fa
 
 One last point about top down designs: in reality it is impossible to start with a complete plan, along the lines shown, and write the final program from it. The process of implementing the program in SIMULA will show errors in it and suggest better solutions to some problems. Thus, we can change the design in the light of experience, but we should never change the program without making the same changes in the design. It is surprising how quickly you can forget what the program really does if you have not got a clear description of it. It is even worse if someone else has to look after a program written by you. Since we are writing "real" programs, we must do the job properly.
 
-###Some simple starting points
+### Some simple starting points
 
 We are going to write some programs now which can be extended to perform some of the functions associated with components in our plan. In fact they may prove useful in other places in the system as well. There are two that are simple to write using if statements and if-then-else statements. One will check if a text starts with a double blank and remove one blank if it does. The other will check if a line is longer than 60 characters and split it if it is.
-###Double blank removal
+### Double blank removal
 
 This problem is easy to describe in English. We have a text variable, which may contain any number of printing characters (we assume no non-printing characters are present). If the first two of these are spaces (ISO blank characters) we want to remove one of them, to leave a shorter text.
 A good way of writing programs is to write them in SIMULA as far as we can at the moment and to describe any parts which are missing in English. The program in example 4.4 shows this, with the genuine SIMULA parts in normal letters and the informal English descriptions in italics.
@@ -223,7 +223,7 @@ Example 4.7: Complete double space remover.
              OutImage
           end Double space remover
 Do not worry too much if this is not completely clear at first. With a little study you should get an idea of what is happening. An even better idea is to try compiling and running this program. Try various combinations of spaces at the start of the input you use.
-###Exercises
+### Exercises
 
 4.1 Try compiling and running the program below.
          begin
@@ -255,7 +255,7 @@ Change this program so that whatever value is assigned to T it will not cause a 
                    comment But all it does is print blank lines;
                    OutImage
                 end of greeting
-###Line breaker
+### Line breaker
 
 Our second example breaks lines at a length of 60 characters. It is rather crude, but we can improve it. This is another development technique which is widely used - stepwise refinement. Stepwise refinement works by getting part of the job working and moving, one step at a time, towards a complete solution.
 Again we start with an informal half SIMULA description, in example 4.8.
@@ -282,7 +282,7 @@ You have probably also noticed the comparison and the new symbol it uses, >. Thi
 
 We are left to fill in the actions when the length of the line is greater than 60 characters. One immediate problem is that more than one action is required, yet only a single statement is allowed in this place in the if-then-else statement. Fortunately, we have already seen the answer.
 
-###Compound statements and blocks as statements
+### Compound statements and blocks as statements
 
 If you think back I mentioned that a block in SIMULA can be used as a statement. More generally, we can use a sequence of statements enclosed in begin and end wherever we can use a simple statement.
 In fact SIMULA uses the term "compound statement" for such a sequence if it contains only statements and the term block where it contains its own declarations. Let us rewrite our program using each in turn to see this. First with a compound statement in example 4.9. Note that we have used two new variables, which are only needed within the compound statement. We can rewrite this using a block and declaring these where they are used. This prevents accidental assignment to them elsewhere, since variables declared inside a sub-block are not visible outside of it. They are, however, visible inside sub-blocks which it encloses. In general it is safest to declare variables as close to the point where they are used as is possible.
@@ -340,7 +340,7 @@ Here, as promised is a list of the simple relational operators in SIMULA.
           <                  lt           is less than
           >=                 ge           is greater than or equal to
           <=                 le           is less than or equal to
-###Summary
+### Summary
 
 We have seen the use of if and if-then-else statements to enable choices within our programs.
 We have seen how top down design works and begun to outline the software that we shall build as our practical work in this book. Using if and if-then-else statements we have written programs which will form the basis for some parts of our system - double blank removal and line breaking.
@@ -351,7 +351,7 @@ We have seen how to replace simple statements with compound statements and block
 
 {{ book.Chapter5 }}
 
-###Exercises
+### Exercises
 
 4.7 Extend our line breaking program to cope with lines longer than 120 characters.
 4.8 Could we extend the program to cope with lines even longer than this? How does this fit in with the problem in 4.5?

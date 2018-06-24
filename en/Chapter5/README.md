@@ -1,8 +1,8 @@
-#Chapter 5 - Would you mind repeating that?
+# Chapter 5 - Would you mind repeating that?
 
-##Texts and while loops
+## Texts and while loops
 
-###Don't stop until I tell you
+### Don't stop until I tell you
 
 In the last chapter we twice considered the question of how to extend programs which assumed a maximum number of repeated tests, so that any number could be dealt with, as the data required. I hope you managed to deal with triple spaces and triple length lines without too much trouble. Obviously it would be more of the same to cope with four spaces or lines longer than 180 characters and so on. But how can we cope with any number of repetitions?
 This situation is obviously going to crop up in most real programs. To deal with it SIMULA has a statement known as a while loop. Example 5.1 shows it in use.
@@ -41,12 +41,12 @@ The simplest is where the first number is negative. In this case the condition N
 
 Another possible stream is one positive number followed by a negative number. Here the condition is true the first time and the number is added to Total. When the next number has been read the program moves back to while. This time the condition is false and so the statement after do is skipped this time and the total will be the value of the first number.
 
-###Exercise
+### Exercise
 
 5.1 Work through the case where two positive numbers are input, followed by a negative one. It is known as "dry checking" when you try the program "by hand" in this way.
 Compile and run the program to make sure you were right.
 
-###Line breaker revisited
+### Line breaker revisited
 
 We can now extend our line breaker to deal with any length of line. Let us write it out informally, to get our design right.
 The important things to consider when writing programs using while loops are:
@@ -113,10 +113,10 @@ Example 5.4: Linebreaker 2.
                 end
 This time I have used a more concise way of printing the first 60 characters and, since Image takes the place of Second in the examples in chapter four, no extra text variables are used.
 
-###Exercise
+### Exercise
 
 5.2 Are there any line lengths which are not catered for? If you can think of any, modify the program to cater for them.
-###What is a text?
+### What is a text?
 
 In the last chapter we saw some properties of text, which make it a much more complex type than integer, for example. Let us consider further what exactly a text is and what properties it has. In fact it is so complex that we shall only look at half of its properties here and leave the rest until chapter 8.
 So far we have seen that a text has a string of characters. This may be of any length from zero to some very large number. The maximum length is system dependent and you should consult the User's Guide or Programmer's Reference Manual for the SIMULA system you are using. It is unlikely to be too small for you.
@@ -125,17 +125,17 @@ We have also seen that a text contains procedures, which are inside it or "local
 
 Strictly speaking the location reserved for the text variable holds a reference to a sequence of characters. These characters are known as a text frame. A text reference contains a pointer to its text frame plus related variables and procedures. The use of these will, hopefully, soon become clear.
 
-###A text reference
+### A text reference
 
 The variables inside a text reference are not visible outside it. They are used by the procedures which form the visible attributes of a text, along with the text frame.
 Here are the major parts of a text, with examples of their use.
 
-###Text frame
+### Text frame
 
 The value part of a text is the string of characters to which its reference variable points. This is known as the text frame referenced by that variable. It is a location in the computer's memory holding a sequence of characters and has a fixed length.
 Two text frames may overlap and share some part or all of the same sequence of characters and, by implication, of the same location.
 
-###Length
+### Length
 
 The length of the string of characters in the text frame is held in a hidden integer in the text reference variable. Its value can be obtained by calling the local integer procedure Length. We have used this in some earlier examples to find the length of a line of input.
 Example 5.5: Use of Length
@@ -148,7 +148,7 @@ Example 5.5: Use of Length
                    OutImage
                 end
 Note that the name given to the integer is irrelevant to the call of Image.Length. I have called it Length to demonstrate that the procedure Image.Length is different from any use of Length on its own, in the program itself.
-###Pos
+### Pos
 
 The position of the character which will be read next in the text frame is held in another hidden integer variable within the text reference. It can be read by calling the integer procedure Pos. When a text object is first created Pos will give the value 1. After calling GetChar for the first time it will give 2 and so on.
 Example 5.6: Use of Pos.
@@ -168,7 +168,7 @@ You should get
                 1
                 2
 as output when you run this.
-###More
+### More
 
 More tells you when you have reached the end of a text. It returns either true or false, i.e. it is a Boolean procedure.
 More gives the value true as long as the value given by Pos is between 1 and the value given by Length. Thus, once the last character has been read, More returns the value false.
@@ -190,7 +190,7 @@ When you run 5.7 you should get output of the following form.
                 3
                 4
                 etc. until Image.Length
-###Constant
+### Constant
 
 Boolean procedure Constant is a late addition to the definition of text. It returns the value false unless the text frame for its text reference is non-writeable, in which case it returns true. Only text frames generated by reference assignment of a constant string (see below) or sub-texts generated from these will cause Constant to return True. Any attempt to alter the contents of a text frame whose reference returns true for Constant will cause a runtime error to be reported.
 As a very new feature, Constant will not be recognised by many older systems.
@@ -204,7 +204,7 @@ Example 5.8: Use of Constant.
          T :- Copy("Writeable");
          if T.Constant then OutText("Wrong") else OutText("Correct");
       end
-###Sub and Start
+### Sub and Start
 
 We have already used Sub. Sub returns a reference to a text frame made up of a sequence of characters which are part of the original text. It has two integer parameters. The first specifies the number of the character in the original text frame which will be the start of the subtext. The second specifies the number of characters which will be in the subtext.
 Example 5.9 will print out the following:
@@ -246,7 +246,7 @@ Example 5.10: Use of Start.
          OutInt(T3.Start,4);   ! 3+3-1=5;
          OutImage
       end
-###Text assignments
+### Text assignments
 
 The oddest thing about texts is that there are two different kinds of assignment statement, using two different assignment operators. We have already used both, but now we can explain their differences.
 There are text reference assignments and text value assignments. Examples are:
@@ -295,13 +295,13 @@ c) Left hand text shorter than right.
                    OutText(Left);OutImage;
                    OutInt(Left.Length);OutImage
                 end
-###NoText
+### NoText
 
 When you create a text variable it is set to point to NoText. NoText is an imaginary text frame with no characters. Thus it has a Length of zero and any value assignment to it will fail, except when the value is the empty text value, "". This is the reason we had to use Blanks in our early examples, to make what you should now recognise as a text reference assignment to any text variable, before any value assignments were made to it.
-###Creating text objects
+### Creating text objects
 
 In general, we must make a reference assignment to a text variable before we use it for almost anything else. This points it at a text frame and sets the values for Pos, Length etc., but where does this object come from in the first place? In fact we have used several methods of text object generation already, without explaining them in detail. Here is a more detailed look.
-###Blanks
+### Blanks
 
 The standard procedure Blanks creates a new text object containing only spaces. It has one integer parameter, which specifies the number of space characters it is to contain and, thus, sets its Length. Start and Pos will initially be 1. More will be true. Constant will be false.
 Example 5.12: Use of Blanks for text generation.
@@ -313,7 +313,7 @@ Example 5.12: Use of Blanks for text generation.
                    OutInt(Empty.Length,4);
                    OutImage
                 end
-###Reference assignment of text constants
+### Reference assignment of text constants
 
 We have seen how text constants, or strings, are represented. When a text reference assignment, whose right hand side is such a constant, is made, a text frame is created containing the characters in the string.
 One important property of the text frame created in this way is that it is regarded as constant or "read only". Any attempt to overwrite its characters will cause a runtime error.
@@ -330,7 +330,7 @@ Example 5.13: Text constant reference assignment.
                    OutInt(Full.Length,4);
                    OutImage
                 end
-###Copy
+### Copy
 
 In older SIMULA systems, this reference assignment of text constants was not allowed. If you are using such a system you will have to use the standard procedure Copy to do the same thing. Copy will still work on newer systems, so if you may need to move your programs around a lot it might be safer to use it from the start.
 Copy differs from constant text reference assignment in that the text frame created is alterable or "writeable". It is possible to overwrite its characters. Thus Copy may be used for many purposes where text reference assignment of constants would not be suitable, even on newer systems.
@@ -352,14 +352,14 @@ Example 5.14: Text generation using Copy.
                    OutInt(NewFrame.Length,4);
                    OutImage
                 end
-###Line breaker again
+### Line breaker again
 
 Using the facts about reference assignment of text variables that we have just seen, it is possible to write our line breaking program more neatly. It should now be obvious why we used the integer LenLeft to hold the length of Image which remained. It is now possible to use Image.Length instead.
 This version has another advantage, which probably is not apparent. In the version using value assignment, the Length of Image remains unchanged throughout, with more space characters following the visible characters after each assignment of Image.Sub. These characters are not present after the reference assignments in the new version. Since some output devices make a printing movement even for a space, their presence may slow down output. They also take up space in the computer's memory which is freed in the new version.
 
 Example 5.15: Linebreaker using reference assignment of texts.
 
-begin
+                begin
                    InImage;
                    inspect SysIn do
                    begin
@@ -375,7 +375,7 @@ begin
                       OutImage
                    end
                 end
-###Exercises
+### Exercises
 
 We have had quite a lot to absorb recently, so here are some examples to help your digestion. Then we will have another look at space removal and a final look, for the moment, at text objects.
 5.2 Write a program to draw a Christmas tree, like the one below.
@@ -406,7 +406,7 @@ We have had quite a lot to absorb recently, so here are some examples to help yo
 using parts of the string "May Charlie stay for curry?".
 5.8 Is it possible to rewrite the word counting program to allow full stops (periods) and commas to be word separators? What extra SIMULA facility would be useful for this?
 
-###Double blank remover, mark two
+### Double blank remover, mark two
 
 The problem with our double blank removing program is that it will only work when the double blank is at the start of the text. What we really need is a program to read along the whole of a text and remove any double blanks. Even better, it should remove treble and other multiple blanks as well.
 Using our informal SIMULA description method, we can start with the program in example 5.16.
@@ -486,7 +486,7 @@ Try following some texts through the program on paper. In particular try to thin
 
 We still have two parts of the program to fill in. Before we can do so we must look at some more properties of text objects.
 
-###GetChar and PutChar
+### GetChar and PutChar
 
 We have seen how GetChar works, but let us quickly define exactly what it does. GetChar returns the character at the current position in a text and increments the position counter by one. Thus successive calls on GetChar will scan through a text character by character.
 PutChar overwrites the character at the current position in a text with the value passed to it as a parameter. It has a single character parameter. It increments the position counter by one each time it is called.
@@ -511,7 +511,7 @@ Example 5.18: Text concatenation using GetChar and PutChar.
                       OutImage
                    end
                 end
-###SetPos
+### SetPos
 
 One of our problems in our space removal program is solved immediately by the procedure SetPos. This takes one integer parameter. SetPos resets the current position in a text to the value passed to it as a parameter. Using this we can rewrite our text concatenation program more simply.
 Example 5.19: Text concatenation with SetPos.
@@ -532,7 +532,7 @@ Example 5.19: Text concatenation with SetPos.
                       OutImage
                    end
                 end
-###Strip
+### Strip
 
 Another small problem is solved by the procedure Strip. This returns a text reference to the original text with any trailing spaces, i.e. any spaces at the right hand end of the text, removed. Try the program in example 5.20 to see this at work.
 Example 5.20: Use of Strip.
@@ -546,7 +546,7 @@ Example 5.20: Use of Strip.
                    OutInt(T.Length);
                    OutImage
                 end
-###Main
+### Main
 
 The last part of a text object that we need to consider at this point is the procedure Main.
 When a text variable is pointed at a subtext, by using Sub or Strip, the result is that the text variable points at a new text frame. This shares some of the characters in the original, main text, but has its own local Pos, Length and other attributes. Pos will be 1 and Length will be the length of the subtext.
@@ -610,7 +610,7 @@ Example 5.22: Adding SetPos and Strip to multiple space deletion.
                   OutImage
                end
             end
-###Multiple spaces finally removed
+### Multiple spaces finally removed
 
 First consider example 5.22, where SetPos and Strip are added to our program. We have now catered for everything except the actual deletion process.
 Example 5.23 adds the final stage,the removal of those blanks. Watch closely, as we are going to use a very powerful property of text reference assignment.
@@ -662,7 +662,7 @@ Example 5.23: The complete multiple space remover.
 The point to note is that when the text variable T2 is pointed at the text frame already pointed to by T, the effect is that a new reference is created with all its current values the same as T. As in a subtext, some of the characters are shared by both frames; in this case it is all the characters which are shared. When T.GetChar is used, it is only the Pos of T that is affected. That of T2 is unaffected.
 When we are shuffling the characters to the left to remove unwanted spaces, we are able to pretend that T and T2 are entirely different texts. If we did not do this, we would have to copy into another text frame and then back again. This way of manipulating the characters in a text is very powerful, but must be fully understood and used with great care. It is only when the part of the text that we are copying from is ahead of the part that we are copying to that this method will work.
 
-###Summary
+### Summary
 
 We are now writing programs which really do things.
 In this chapter we have seen the while loop and how it can allow an action or sequence of actions to be repeated as often as necessary.
@@ -681,7 +681,7 @@ We have seen how two text variables pointing at the same sequence of characters 
 
 {{ book.Chapter6 }}
 
-###Exercises
+### Exercises
 
 5.9 A computer fault has changed some small letter a's into ampersands, '&'. Write a program to scan a text and correct this.
 5.10 A similar fault has changed every occurence of the word "and" to the word "boe". Write a program to correct texts which have suffered this fate.

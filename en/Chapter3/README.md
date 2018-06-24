@@ -1,11 +1,11 @@
-#Chapter 3
+# Chapter 3
 
-##Type Cast Actors
+## Type Cast Actors
 
-###The importance of types
+### The importance of types
 
 So far we have seen three types: integer, real and text. The only one we have looked at in any detail is integer. In fact SIMULA contains several other types as keywords or combinations of keywords. In addition it is possible for you to create combinations of these simple types and give them names, by using the class mechanism. In this chapter we will look at the simple types which are already defined in SIMULA.
-###Types in assignments
+### Types in assignments
 
 A type is given in a declaration so that the SIMULA system knows how much space to allow for the declared quantity. The system checks whenever a new value is stored into this location that the value is of the same type. If the types are different then the system may do one of two things.
 
@@ -40,7 +40,7 @@ Clearly we must be very careful how we use types. Even where we are allowed to m
 
 Allowing the system to convert things in this way is sometimes known as "implicit conversion". SIMULA also provides procedures which can be used to carry out type conversion in a controlled way. In general it is safer to use these "explicit conversion" procedures, so that it is obvious when reading the program what is happening. We shall look at the rules used in implicit conversion at the end of this chapter.
 
-###Types in expressions
+### Types in expressions
 
 The rules about mixing types in assignments also apply in expressions. For instance, we are not allowed to add together an integer and a text.
 Example 3.3: A legal mixing of types in an expression.
@@ -77,13 +77,13 @@ Where the integer division operator, //, is used in an expression, the values mu
 
 This subject is covered in more detail in the mathematical {{ book.AppendixB }}.
 
-###Types of parameters
+### Types of parameters
 
 Exactly the same rules apply where values are passed as parameters as apply when they are assigned. In effect the parameter given is assigned to a location with the type specified for that parameter. This will be discussed further in {{ book.Chapter5 }}.
-###Standard types
+### Standard types
 
 We shall now look at each of the simple types provided in SIMULA. For those who wish to use SIMULA for mathematical programming, {{ book.AppendixB }} contains more information on the use of arithmetic types.
-###integer
+### integer
 
 As we have seen, values are of type integer if they are whole numbers. They may be positive, negative or zero.
 On any particular SIMULA system there will be a largest positive and a smallest negative number which can be held in an integer location. The documentation for a particular system will tell you what these limits are. There are system constants which contain them and these may be used in your programs to check that your values do not exceed them. They are called MaxInt and MinInt respectively and are described in {{ book.Chapter20 }}. Such limits do not normally cause problems.
@@ -99,7 +99,7 @@ Example 3.3: integer constants
 Spaces after the plus or minus are ignored. Spaces between digits are not allowed.
 It is also possible to give integer constants in other number bases. This is described in mathematical {{ book.AppendixC }}.
 
-###real
+### real
 
 A real value is a number which is not necessarily whole. It is held in a form which allows it to contain a fractional part. In common speech it is what is known as a 'decimal' number or decimal fraction, i.e. it is written with a decimal point separating the whole and fractional parts of the number.
 A real value is restricted both by a largest/lowest range and by the number of significant decimal places which can be held. Again this will be explained in detail in the documentation for your SIMULA system. There are two system real constants, Maxreal and MInReal, which may be used to check them in your programs. These are described in {{ book.Chapter20 }}. Again they will not cause problems for most users.
@@ -116,7 +116,7 @@ Example 3.4: Legal fixed point real constants.
 The use of spaces is not allowed between digits or between a digit and the decimal point.
 Mathematicians often use another notation to write decimal values, especially where these are very large or very small. This way of writing them is known as "floating point" and is also allowed for writing real constants in SIMULA. It is described in mathematical {{ book.AppendixB }}, since most programmers will never use it.
 
-###character
+### character
 
 A character holds a value which represents a single character. SIMULA allows you to use any of the characters in the "character set" of the computer that you are using plus the characters defined by the International Standards Organisation (ISO) character set standard. (This is sometimes known as the ASCII character set.) More details on character sets are given in {{ book.Chapter12 }}.
 It is important to stress that a character has a different type from a text (see below).
@@ -141,7 +141,7 @@ Example 3.5: Legal character constants
 Note that case, i.e. the difference between capital and small letters, is significant in character constants. Thus 'A' and 'a' are not equivalent.
 Note also how a single quote is represented as a character constant.
 
-###Boolean
+### Boolean
 
 A Boolean quantity can only have two values. These are True and False.
 The use of Boolean quantities may not be intuitively obvious and we merely mention them here. They will be considered in more detail when we look at conditional statements and loops.
@@ -150,7 +150,7 @@ A Boolean can be assigned the value of any conditional expression and can be use
 
 Boolean constants can only be represented by the keywords True and False.
 
-###text
+### text
 
 A text variable is used to refer to and manipulate sequences of characters. A sequence of characters is often known as a "string". In the examples using text variables so far we have often assigned strings as the values to be placed in locations declared as type text. From this it might seem that a text and a string are the same thing. In fact a text is more complex than a string and we shall spend most of chapters 5 and 8 looking at what a text really holds.
 Text constants are strings, i.e. sequences of characters, surrounded by double quotes. Each character in a string can be any of those in the ASCII (ISO) standard set.
@@ -176,7 +176,7 @@ Example 3.6: Legal text constants.
 Note that the last string shown in 3.6 will contain only one double quote. When you want to have a text constant which contains one double quote you must type two, so that the compiler knows that it is not the end of the string. Another example showing this is:
 "This string contains only one "", but we must type two."
 Note also that the single character text constants "%" and """" are not the same as the character constants '%' and '"'. They have different types.
-###Initial values
+### Initial values
 
 An identifier of a certain type, which is not declared as a constant (see later in this chapter), is often referred to as a "variable" of that type, since, unlike a constant of the same type, its value can be changed by assigning to it. When we declare such variable, the SIMULA system places an initial value in the location identified. This value is the same on all SIMULA systems on all computers for all variables of a given type.
 Thus it is quite legal, and meaningful, in SIMULA to write
@@ -198,7 +198,7 @@ The values placed in each type of location are given below.
            text         NoText, the empty text, referring to an empty string.
                         Equivalent to "".
                       
-###Implicit conversion of reals and integers
+### Implicit conversion of reals and integers
 
 When a real value is assigned to an integer location or vice versa we have said that the value will be converted to one with the type of the location. When integers are converted to reals, no problems are involved in understanding what will happen. The values 3 and 3.0 are usually thought of as identical and such a conversion presents no ambiguities.
 On the other hand, when reals are converted to integers, the result depends on how we deal with the fractional part of the real value. How do we get get rid of the figures to the right of the decimal point?
@@ -233,7 +233,7 @@ Since no armchair programmers are allowed you should now try compiling and runni
 
 There is more on this subject in mathematical {{ book.AppendixB }}.
 
-###Constant declarations
+### Constant declarations
 
 Constant declarations were introduced into SIMULA very late on and are still regarded as controversial by older Simula programmers. They should be used with some restraint if you want to move your programs to other systems. Older SIMULA systems will not have constant declarations.
 A constant declaration allows an identifier to be assigned a value in its declaration. This identifier may not then be assigned another value. This can be very useful when using the same value frequently in a program, especially when the value is easily mistyped or has no obvious meaning.
@@ -260,7 +260,7 @@ Example 3.8: Constant declaration.
          OutFix(2*Pi*Radius,6,12);      ! 2 times Pi times Radius;
          OutImage
       end..of..program
-###Summary
+### Summary
 
 We have looked in some detail at the importance of the type associated with a value. In particular, we have noted that values can only be stored in locations of the same type. Attempts to store them in locations of a different type will result in implicit conversion to the type of the location or an error being reported.
 We have seen that mixing of types in an expression is restricted in a similar way. So is the use of types of parameters.
@@ -275,7 +275,7 @@ We have seen how constant identifiers may be declared.
 
 {{ book.Chapter4 }}
 
-###Exercises
+### Exercises
 
 Correct the following programs.
     1. begin

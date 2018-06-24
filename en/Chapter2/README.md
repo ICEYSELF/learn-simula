@@ -1,10 +1,10 @@
-#Chapter 2
+# Chapter 2
 
-#\- and end at the end
+# \- and end at the end
 
-##The nature of correct programs
+## The nature of correct programs
 
-###Rules and penalties
+### Rules and penalties
 
 Chapter one gave an example of a correct program. When you altered it as you were asked to in exercise 1.3 and recompiled it, some of the results will have been incorrect programs. (If you have not yet completed the exercises in chapter 1, you should do so now. It will be much easier for you to follow this chapter.)
 The compiler will have printed error messages for some of these variations. It may also have printed warnings. Sometimes, though probably not in any of your attempts at 1.3, the compiler will report success in producing the machine instruction version, but the part of the SIMULA system which runs the program, which we call the runtime system, will print an error message or warning during the execution of the program.
@@ -17,12 +17,12 @@ Even when a program compiles and runs without producing error messages, the prog
 
 When it comes to writing correct SIMULA programs, there are two sets of rules. Although it is not always sensible to separate them, the error messages from the compiler may refer to mistakes in this way and so we will look at them briefly now.
 
-###Syntax rules
+### Syntax rules
 
 The commonest errors reported by a compiler are those which do not obey the grammar or "syntax" of the language. Often they are the result of typing errors. If you still have not managed exercise 1.1, this is probably because of a syntax error caused by mistyping.
 The rule that a program block must start with begin and finish with end is a syntax rule.
 
-###Syntax of declarations
+### Syntax of declarations
 
 The declarations
 
@@ -43,7 +43,7 @@ As we shall see later, this sequence could still be correct SIMULA, meaning the 
 
 Before considering this second category, let us look at some more syntax rules. These still deal with our earlier examples and will probably answer some questions which have occurred to you already.
 
-###Syntax of identifiers
+### Syntax of identifiers
 
 We have used the word identifier as the technical term for the name given to something in our programs. So far we have not considered what an identifier must look like.
 The identifiers which we have used so far are
@@ -71,7 +71,7 @@ The following are valid identifiers
      MAX_SIZE 
      G43 
      I
-###Syntax of blocks
+### Syntax of blocks
 
 We have already looked at the syntax of blocks informally, now let us be a little more formal. The rules for a block are as follow.
 A block starts with the keyword begin, which, like all keywords, must have at least one space following it or be the last word on a line.
@@ -93,17 +93,17 @@ The following are valid blocks
     end
     
     Example 2.3
-	    begin
-		    integer I;
-		    real Arc;
-		    I := 5;
-		    Arc := 3.2;
-		    OutInt(I,3);
-		    OutImage
+          begin
+                integer I;
+                real Arc;
+                I := 5;
+                Arc := 3.2;
+                OutInt(I,3);
+                OutImage
 	    end
 Although all these blocks are syntactically correct, 2.1 will not result in any actions, since it contains no statements. 2.2 will cause an error to be reported, since there is no declaration to set aside space and define a type for Result before it is used in the statement.
 
-###Exercises
+### Exercises
 
 You are probably getting rather impatient with all these rules. Let us try out a few of them. In each of the following program blocks, find and correct the syntax errors.
 
@@ -141,9 +141,9 @@ We have already defined identifiers. We shall define constants properly in the n
 
 Examples 2.4: Procedure calls.
 
-	OutImage	No parameters. Moves output to next line.
-	Outtext("HI")	One parameter, a text, which is printed on the current line. In this example a text constant is used as the parameter.
-	OutInt(643,3)	Two parameters, both integers, separated by a comma. Prints out the first integer on the current line, padding on the left with spaces if this produces fewer figures than the second integer. Either or both the integer constants given as parameters in the example could have been replaced with identifiers or expressions.
+      OutImage	No parameters. Moves output to next line.
+      Outtext("HI")	One parameter, a text, which is printed on the current line. In this example a text constant is used as the parameter.
+      OutInt(643,3)	Two parameters, both integers, separated by a comma. Prints out the first integer on the current line, padding on the left with spaces if this produces fewer figures than the second integer. Either or both the integer constants given as parameters in the example could have been replaced with identifiers or expressions.
 
 Assignment statements have an identifier followed by optional spaces, followed by the assignment "operator", followed by optional spaces, followed by an expression. The assignment operator is the sequence colon followed by equal-sign, :=. Before giving an informal description of expressions, it is probably best to consider the examples of assignment statements given as 2.5.
 
@@ -160,7 +160,7 @@ Examples 2.5: Assignment statements.
     Next   :=   Average*Number + 2
 The use of spaces before and after the assignment operator has no effect on the correctness of the statement. This applies to all "operators" in SIMULA.
 
-###Expressions
+### Expressions
 
 Several kinds of expressions are shown to the right of the assignment operator in these examples. The simplest of these is a constant, such as 3 or "PLEASE TYPE YOUR NAME". These are explained more fully in the next chapter.
 An expression can also be a single identifier, such as Last in the second example.
@@ -173,7 +173,7 @@ is the identifier Last followed by the addition operator followed by the constan
          Average*Number + 2
 is the identifier Average followed by the multiplication operator followed by the identifier Number followed by the addition operator followed by the constant 2. We shall not attempt a complete definition of expressions, but explain them as we need to use them. These examples should give a feel of what is meant.
 
-###A note on operators
+### A note on operators
 
 The commonest arithmetic operators are given below. For a complete outline of mathematical operators, see appendix A.
 
@@ -183,7 +183,7 @@ The commonest arithmetic operators are given below. For a complete outline of ma
          /   Division with non-whole numbers (reals)
          //  Division with whole numbers (integers)
          :=  Assignment
-###Saying what you mean
+### Saying what you mean
 
 As we looked at the rules for writing parts of SIMULA programs, we found that it was possible to write SIMULA whose syntax was correct but which was still illegal. There are extra rules to be obeyed. These spell out the meaning of a sequence of SIMULA. When the way we write the parts of such a sequence is correct, it is still possible that we have put these parts together in a way which has an illegal meaning. These rules of meaning are sometimes called the semantic rules or, more simply,semantics of the language.
 English has syntax and semantics in the same way, although they are far more complex than those for SIMULA. Let us look at an example in English of a sentence whose syntax (or grammar) is correct, but whose semantics (or meaning) is nonsense.
@@ -212,24 +212,24 @@ This time we have not defined T1 as having a type which fails to match "3". T1 h
 
 So, a few rules about how we must write SIMULA to avoid semantic errors.
 
-###Semantics of declarations
+### Semantics of declarations
 
 **The same identifier cannot be declared twice in a block.**
 The identifier is used to name a space in the computer's memory which is large enough to hold a value of the type specified. Whenever the identifier is used subsequently, it refers to this space and this type of value.
 
-###Semantics of procedure calls
+### Semantics of procedure calls
 
 **A procedure call must have the correct number of parameters.**
 Each parameter must be of the correct type. This is explained in more detail in the next chapter.
 
 The actions of the procedure are performed, using the parameters to provide information for the procedure if necessary.
 
-###Semantics of assignments
+### Semantics of assignments
 
 **The type of the expression to the right of the assignment operator must be "compatible" with the type of the identifier on the left.**
 The value of the expression on the right will be stored in the location reserved for the identifier on the left.
 
-###Semantics of expressions
+### Semantics of expressions
 
 **The types of the quantities in an expression must be compatible. The type associated with the value of an expression is determined by the types of the quantities in it, except when the division operators are used. In this case the type is the same as the operator, i.e. integer for "//" and real for "/".**
 The working out of an expression by the SIMULA system, known as its "evaluation", is done in the following order:
@@ -240,12 +240,12 @@ Working from left to right all additions and subtractions are performed.
 
 This is explained more fully in {{ book.AppendixA }}.
 
-###Semantics of blocks
+### Semantics of blocks
 
 Any identifier used in a statement in a block must already have been declared.
 The statements in the block are performed in the order indicated.
 
-###Syntax and semantics of a comment
+### Syntax and semantics of a comment
 
 **A comment is a special sequence in SIMULA which is treated as a space by the compiler. It contains a message which explains what is going on around it in human terms. Its syntax is quite simple.**
 A comment is:
@@ -290,7 +290,7 @@ Example 2.6: The use of comments.
                    OutText(T);
                    OutImage
                 end Double space remover
-###Summary
+### Summary
 
 This has been a longer chapter and has introduced a lot of important ideas. You should not worry if you do not see the point of some of it yet. Whenever we come to look at a new feature in SIMULA you will see how the concepts of syntax and semantics help define the ways in which the feature can be used. Within a few chapters you will find that you are using words like syntax without noticing. In the meantime, you may need to refer to this chapter while reading some of the following chapters, until you feel confident.
 We have looked in this chapter at the rules that tell you how you must write your program for the compiler to be able to make sense of it. These are called the "syntax" of SIMULA.
@@ -303,7 +303,7 @@ We have seen the important semantic rules for those parts of SIMULA whose syntax
 
 We have looked at the rules for comments, which have no meaning, only syntax.
 
-###Exercises
+### Exercises
 
 Correct the errors in the following program blocks.
     1.  begin

@@ -1,6 +1,6 @@
-#CHAPTER 9 - classes as Records
+# CHAPTER 9 - classes as Records
 
-###A simple example
+### A simple example
 
 One very common use for computers in offices today is for printing self-adhesive labels for envelopes. Consider a program which reads in a name and address followed by the number of labels required. We will simplify things by printing our labels underneath one another, one at a time.
 Using our knowledge of SIMULA so far, we might write the program shown in example 9.1.
@@ -131,7 +131,7 @@ Thus, within the inspect statement in example 9.2, the occurences of Nam, Street
 
 A full description of remote accessing is given in {{ book.Chapter13 }}.
 
-###Exercises
+### Exercises
 
 9.1 Rewrite the labels program, adding an integer attribute to class Lab. Extend the program so that it will:
 read a label from SysIn, prompting for each attribute in turn, including the integer attribute;
@@ -153,7 +153,7 @@ request the user to type in the service required and then perform it, initially 
 add an additional service to find a record according to its works number;
 add another service to print out all records where a specified attribute has a specified value, e.g. Name=F.Jones;
 add another service to find a record and update any or all of its attributes and write an updated file.
-###Making classes work for themselves
+### Making classes work for themselves
 
 Classes are objects containing attributes. These may be of any type visible in the block where the class is declared. As we have seen this can allow us to create objects which match the natural groupings of data that we wish to process in our program. This approach is usually called "object oriented" programming.
 We also saw, when we considered class File and its sub-classes, that it is not just data attributes that a class object can contain. The power of the class concept as a way of representing objects in our programs is considerably increased by the ability to define procedures as attributes of classes.
@@ -363,7 +363,7 @@ Example 9.5: Inserting a numbered label using procedure attributes.
        OutLine(Source);    ! Name of last Output file used;
     end*of*program
 
-###Making classes work even harder
+### Making classes work even harder
 
 Procedures as attributes make it possible to embed sequences of actions inside classes. This removes the need for tedious reprogramming of these sequences every time they are used in the main program. Having designed and implemented the class attributes, their internal details can be forgotten. Another mechanism can save even more tedious work.
 Often the first actions performed on a new object of a particular class follow the same pattern each time one is created. Typically they involve setting the initial values of the data attributes of the object. In class Lab we made this much easier by writing ReadLabel in the definition of the class. This meant that creating and initialising the data in a Lab object required only two statements. By using a simple extension of the class declaration of Lab, we can do it in one.
@@ -438,7 +438,7 @@ Example 9.6: Parameters and initialisation Code in classes.
          Label1 :- new Lab(True);   ! Use prompting;
          Label1.WriteLabel
       end..of..program
-###Summary
+### Summary
 
 In this chapter we have seen how a programmer can define his or her own complex object types, using structures composed of simpler types. The SIMULA feature which is used for this is the class.
 We have seen that procedures may also be attributes of classes.
@@ -455,7 +455,7 @@ Lastly we have seen the use of parameters to classes. The types and modes allowe
 
 {{ book.Chapter10 }}
 
-###Exercises
+### Exercises
 
 9.3 Extend the definition of a label object to describe a letter to someone. Data should include name and address of both sender and recipient, text of the letter, date and method of sending, e.g. surface or air mail. You may assume any suitable maximum number of lines for the text. Write a program which reads in a letter and prints it along with a label for mailing it.
 What problems would occur if the letter had to be able to contain a large and unspecified number of lines?

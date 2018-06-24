@@ -1,13 +1,13 @@
-#CHAPTER 12 - A Language with Character
+# CHAPTER 12 - A Language with Character
 
-##Character handling, switches and jumps
+## Character handling, switches and jumps
 
-###Working with texts
+### Working with texts
 
 Most of our examples have been concerned with some sort of manipulation of characters in the form of texts. Occasionally we have used GetChar and PutChar to manipulate the individual characters in them. At other times we have used Getint, PutFix etc. to manipulate groups of characters within texts. Any text processing or editing programs are heavily dependent on the manipulation of individual characters as well as their combinations. This chapter shows those features of SIMULA designed to help in this.
 Most of these features are system procedures. We start with two simple ones, shown in example 12.1. This shows a program which finds all the numbers in a text containing a mixture of digits and letters. It is assumed that no other characters will be present.
 
-###Procedures Letter and Digit
+### Procedures Letter and Digit
 
 SIMULA provides two Boolean procedures, Letter and Digit, both taking a single, character parameter. If this parameter is one of a-z or A-Z the procedure Letter will return the value True, otherwise it will return the value False.
 If its parameter is one of 0-9, Digit will return True, otherwise False.
@@ -36,17 +36,17 @@ Example 12.1 : Sorting letters and numbers.
        OutText(NumbersOut);
        OutImage
     end
-###Representing characters
+### Representing characters
 
 Computers store characters in their memory as numbers. Each character is represented by a different integer value.
 Unfortunately there is no single system for this. The numbers representing each character can vary from machine to machine. In practice most machines use either the EBCDIC system or the International Standards Organisation (ISO) system. The ISO system is often called by its earlier name, ASCII. The two systems are shown in tables 12.1 and 12.2. These tables are known as the collating sequences for the two systems.
 
-###Using the internal values
+### Using the internal values
 
 It is sometimes useful to be able to find the internal number representing a character or to be able to convert a number into the corresponding character. SIMULA provides procedures for both of these.
 Example 12.2 shows a program which converts characters in a text which uses ISO characters into an equivalent text containing EBCDIC characters. This is often necessary when reading files transferred from another computer.
 
-###Rank
+### Rank
 
 System integer procedure Rank takes a single character value parameter and returns the number representing the character.
 In 12.2, the characters inside ISOText are in the ISO form and so the call
@@ -112,14 +112,14 @@ Using the same example, if Rank (ISOText.GetChar) returns 32, having found a spa
 
 Thus the use of GetChar, Rank and indexing of the array EBCDICChar has found the value of the EBCDIC representation of an ISO character in our text. Now we need to convert this into a character.
 
-###Char
+### Char
 
 System character procedure Char takes a single integer value parameter, whose value must be legal as the internal representation of a character on that system. (This range should be specified in the documentation for the SIMULA system you are using). Char returns a character whose internal representation is the number passed as a parameter.
 It is important to note that Rank and Char do not concern themselves with which character set is being used, only with moving a number, held in some form such as a binary number, from a location reserved for a character to one reserved for an integer or vice versa. Char objects only if the integer is too large to fit into the, usually, smaller space used for a character. Interpreting characters according to ISO, EBCDIC or whatever is only done by some reading and writing procedures.
 
 Thus, in the example, the EBCDIC representation of the character obtained from ISOText, is passed to Char, which returns a character with this as its internal representation. This can then be written as the EBCDIC translation into EBCDICText, using PutChar.
 
-###Avoiding character set problems
+### Avoiding character set problems
 
 When writing character handling programs to run on any computer, it is very inconvenient to have to allow for the possible character sets on each particular machine. This makes it nearly impossible, in fact, to write truly portable programs using the procedures Char and Rank. Fortunately SIMULA has a way of avoiding this.
 On any but the oldest SIMULA systems, two more system procedures are supplied. They are called ISOChar and ISORank. They match Char and Rank exactly except that they work entirely in terms of the ISO character set.
@@ -173,14 +173,14 @@ The program uses the technique, seen earlier, of creating two references to the 
 
 Note that this program would not work for the EBCDIC character set, if Char and Rank replaced ISOChar and ISORank. This demonstrates the usefulness of the ISO procedures in writing portable programs rather neatly.
 
-###Exercises
+### Exercises
 
 12.1 Because of hardware problems, a file has been corrupted. It now contains a number of unprintable characters. Assuming that letters, digits, spaces, full stops, commas, colons and semi-colons are the only characters which should be present, write a program which will remove the others.
 12.2 Write a program which converts all upper case letters to lower and all lower to upper in a file.
 
 12.3 Go back to exercise 7.8. Using this add the capability to your editor to change the case of the next letter from its current position.
 
-###Making quick decisions
+### Making quick decisions
 
 When writing our text formatting program in chapter eleven, we were forced to use more and more deeply nested if statements to check which directive was being read. This becomes rather clumsy and difficult to read when more than a few choices are possible. It is also slow to run when lots of checks must be made before a course of action is selected.
 The help with this sort of situation, SIMULA contains a feature called a switch. To see how this works, consider example 12.4. This is example 11.1 rewritten with a switch.
@@ -258,17 +258,17 @@ Example 12.4 : The use of a switch
           new Page
        end.of.program
 The letters in the directives are in alphabetic sequence starting with 'B'. Thus they follow the ISO collating sequence. Thus, by subtracting ISORank ('A') from the ISORank of each directive's letter, we can obtain a value between one and three, inclusive. Each integer value so obtained represents one of the three directives.
-###switch declarations
+### switch declarations
 
 The switch declaration is unusual, in that it contains the value assignment operator, :=, as well as identifiers. The syntax of such a declaration is the keyword switch, followed by an identifier giving the name of the switch, followed by the value assignment operator, followed by a list of so called "designational expressions".
 Designational expressions can take a number of forms. In the example they all have the commonest form, a simple identifier.
 
 The identifiers used in such a list specify places in the program to which a "jump" may be made. If you look at the example, three identifiers are listed. (The minimum is one and the maximum will be different on different SIMULA systems.) Further on in the program, each of these identifiers occurs again, followed by a colon. This second occurence is called a label.
 
-###Label declarations
+### Label declarations
 
 An identifier followed by a colon is a declaration of a label for the following statement. Such a declaration is different from those of any other type, since it can occur in the middle of a sequence of statements, rather than before any statements. The example contains four label declarations. The first three, TitleB, TextB and DiagB are used to label the next statement. The fourth, Repeat, appears to label the keyword, end. end is not a statement and so to preserve the rule that label declarations always precede statements, there is said to be an imaginary statement between the colon and end.
-###go to statements with switches
+### go to statements with switches
 
 The switch, Action, is used in a statement starting with the keywords go to. In fact these can be written as a single keyword goto, if you prefer. This is the only combination of keywords where this is allowed.
 A go to statement is the keyword(s) go to followed by a designational expression. In the example the switch identifier, Action followed by an integer value in parentheses is used. This is the other form of designational expression that we shall use. This integer value is an index to the list of designational expressions in the switch declaration above. Thus it can be used to identify a label declaration and through this the next statement to be executed.
@@ -293,29 +293,29 @@ In the example three statements have the form of go to followed by an identifier
 
 These three statements all cause the program to jump to the statement labelled by Repeat. This takes the program to the InImage at the end of the compound statement of the while loop. In other words, once the actions for that directive are complete, the program jumps to start processing the next line, which is assumed to contain the next directive.
 
-###Exercises
+### Exercises
 
 12.4 By extending the list for the switch declaration, moving the position of Repeat and adding a new label declaration, rewrite example 12.4 without the while loop.
 12.5 What would happen in example 12.4 if the go to Repeat statements were missing? Try removing them to check. Note the effect carefully.
 
-###Notes and warnings
+### Notes and warnings
 
 Some people write very intricate programs, which use lots of go to statements. In certain, rather limited, programming languages this is necessary. In SIMULA it is almost never needed.
 The use of too many go to statements makes programs very hard to read and understand. They should only be used when absolutely necessary or in the sort of situation shown in example 12.4, where a switch can simplify a program and make it easier to extend.
 
 It is important in a program using a switch to provide label declarations to match all the designational expressions in the switch declaration. It is not illegal to declare a switch which leads to non-existent labels. It is a runtime error to try to jump to one. In fact it is often best to check before the go to statement that the value of the expression used in the subscripted switch variable is not too large for the list in the declaration and to print an error message or warning if necessary.
 
-###A very special jump
+### A very special jump
 
 A rather new feature in SIMULA, which may not exist in some older systems, is the system procedure Terminate_Program. This causes a jump to the very end of the program, regardless of the current position. This can be useful in providing warnings of disastrous errors and then stopping the program.
 Terminate_Program is the only way for a program using a prefixing separately compiled class containing an @i(inner) statement (see chapter 16), to stop itself without executing the instructions following that @i(inner). It is the only way to stop a program dead from anywhere within it and guarantee that no further actions will be carried out.
 
-###Switches and labels as parameters
+### Switches and labels as parameters
 
 It is possible to pass switches and labels as parameters to procedures. The default mode is reference and name is also legal.
 Using such a parameter, or a switch or label from a block enclosing the one the program is currently in, it is possible to jump out of a block. The normal rules for ending the appropriate type of block will apply.
 
-###Summary
+### Summary
 
 We have looked at how characters are represented by numbers and seen the procedures which allow us to use this.
 We have seen the use of switches and labels, in go to statements and as parameters.

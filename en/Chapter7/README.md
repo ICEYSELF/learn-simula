@@ -1,8 +1,8 @@
-#CHAPTER 7 - File FOR future reference
+# CHAPTER 7 - File FOR future reference
 
-###Simple input and output using InFile, OutFile and PrintFile
+### Simple input and output using InFile, OutFile and PrintFile
 
-###Storing and retrieving information
+### Storing and retrieving information
 
 So far we have been limited in what our programs can do by the need to read everything in from the terminal or batch input stream and write everything out to the terminal or batch printer. This means that our SIMULA programs have not been able to use information already held on the computer or to leave information on the computer for other programs to use. This chapter will show how SIMULA provides very powerful mechanisms for this purpose.
 You are probably used to the fact that computers keep permanent information in collections called files. Some systems use other names such as data sets, but they are essentially the same thing. These files have names by which you can identify them to the computer. Programs can read from these collections of information and write to them.
@@ -13,7 +13,7 @@ In fact a SIMULA File can stand for any source of or destination for information
 
 In fact you have already been using two File objects without being told that that was what you were doing. These are the standard input File, SysIn, and the standard output File, SysOut. Whenever you have used InInt, OutImage and any other input/output instructions you have been using File attributes.
 
-###Simple input
+### Simple input
 
 To read information from the computer we normally use a type of File object known as an InFile. In fact InFile is a sub-class of the object type or class called File. This means that all the properties of File are properties of InFile or are redefined in InFile, but that InFile has some extra ones of its own. In fact all types of File objects are sub-classes of File. InFile is not a direct sub-class of File, however; there is another level between them, called ImageFile.
 Put more simply, class File defines a type of object with a number of attributes used to access sources of and destinations for information on a computer, such as files, printers, terminals and tape readers.
@@ -62,7 +62,7 @@ Most of the rest of the program should be familiar, except for the prefixing of 
 
 The final statement calls the procedure Close, to tell the SIMULA system that this File is not required until Open is called for it again.
 
-####Simple output
+#### Simple output
 
 Corresponding to InFile, but used for output of information, is the class OutFile. This is also a sub-class of ImageFile.
 Example 7.2 is a simple example of the use of OutFile. It corresponds to the InFile example fairly closely and so no further explanation is given yet.
@@ -82,22 +82,22 @@ Example 7.2: Simple output using OutFile.
            Outf.OutImage;
            Outf.Close
         end
-###Exercises
+### Exercises
 
 The information you have about output to files should now be sufficient to allow some simple attempts at reading and writing to files. This is mainly intended to familiarise you with the way in which your particular computer and SIMULA system treat the File objects in SIMULA programs. You should read the documentation for your system carefully at this point.
 7.1 Write a program which prints the integer values 1, 2, 3 and 4 to an OutFile. Check what sort of File your system has created on the computer. See if you are able to examine its contents and list them to a printer.
 
 7.2 Write a program which reads the contents of the File produced in 7.1, using an InFile, and writes it to the terminal or batch output stream.
 
-###ImageFile class InFile
+### ImageFile class InFile
 
 Having seen informally how input and output are handled in SIMULA, let us now consider three of the four sub-classes of ImageFile and what they do, starting with InFile. We shall not consider all the attributes of class InFile here. Some will be dealt with in {{ book.Chapter8 }}. The remaining sub-class will be dealt with in {{ book.Chapter15 }}.
-###Image
+### Image
 
 All ImageFile derived File objects use a text in their reading or writing. This represents the current input/output line or record. Files using this mechanism are called "record oriented". This means that a whole record is read into the Image text or written from it at a time. Most attributes of an ImageFile object operate on the copy in Image, not the actual File or device it stands for.
 Image is a text variable within the ImageFile object. In an InFile, the parameter passed to Open is used initially as its Image, i.e. is assigned by reference to Image. This is usually an anonymous text created by giving the text generator Blanks as the parameter to Open. The number given as parameter to Blanks determines the length of Image and should match the record or line length of the external file or device. Where the external record length is not fixed, the length of Image should be the maximum record length possible or expected.
 
-###Open
+### Open
 
 Open is actually a Boolean procedure. If the attempt by the SIMULA runtime system to find and access the external file specified is unsuccessful, Open will return the value False. This can happen if the external file does not exist, is not permitted to you or for a number of reasons which are system dependent. Any attempt to read from the File subsequently will result in a runtime error.
 Older systems will have Open as a type-less procedure and attempting to open a file which is not available will cause a runtime error on these systems.
@@ -108,12 +108,12 @@ Open also assigns its text reference parameter to Image, creating a "buffer" tex
 
 A successful call on Open will return the value True.
 
-###IsOpen
+### IsOpen
 
 IsOpen is a Boolean procedure. It returns false if the File is not currently open, i.e. no call of Open has yet been made or the File has been closed. Open sets IsOpen to true. Close sets IsOpen to false.
 Older systems may not have IsOpen as a File attribute.
 
-###SetAccess
+### SetAccess
 
 Modern SIMULA systems allow programs to specify certain modes for open files. The exact meaning of these will depend on the physical file system of the computer. Each file used will have initial properties, some of which are defined in the SIMULA standard. These will be found in the documentation for the system you are using. A summary is given in table 7.1.
 All SIMULA systems which meet the current standard will allow files with the following properties.
@@ -145,7 +145,7 @@ Table 7.1: Default modes for file types.
     Bytesize:n   *           *         *         Open
     Rewind      norewind  norewind    N/A      Open/Close
     Purge       nopurge   nopurge   nopurge      Close
-###InImage
+### InImage
 
 The procedure InImage copies the next record from the external file or device into Image. This is equivalent to a text value assignment. If the external record is shorter than Image.Length then it is copied into the leftmost character locations in Image and the remaining character Positions are filled with spaces. If the external record is longer than Image.Length, calling InImage causes a runtime error to be reported.
 InRecord
@@ -157,26 +157,26 @@ Where the external record is longer than Image, only enough is read in to fill I
 
 Where the lengths are the same InRecord acts exactly as InImage, but returns false.
 
-###Close
+### Close
 
 Boolean procedure Close tells the SIMULA system that the external file or device represented by this File object is no longer required by it. This means that it can be used by another File object. Thus, once an InFile has been closed, it can be reopened as an OutFile. Once an external file or device has been released in this way it may also be claimed by other programs and users. If an attempt is then made to reopen it using the original File object, a runtime error may result.
 If Close is unable to perform its task, it returns false. Otherwise it returns true. Older systems will only have Close as a type-less procedure.
 
 If a File is left open at the end of a program, it will be closed by the runtime system, with a warning in most systems. It is safer to close files in the program.
 
-###SetPos
+### SetPos
 
 This procedure is equivalent to Image.SetPos.
-###Pos
+### Pos
 
 This integer procedure returns Image.Pos.
-###More
+### More
 
 This integer procedure returns Image.More.
-###Length
+### Length
 
 This integer procedure returns Image.Length.
-###EndFile
+### EndFile
 
 This is a Boolean procedure. When the last character of the last record in the external file has been read it returns the value True, otherwise it returns the value False.
 Example 7.3 shows of the use of EndFile to read and print the whole of a record structured File.
@@ -202,7 +202,7 @@ Example 7.3: Use of EndFile.
            end
      
         end
-###LastItem
+### LastItem
 
 LastItem is a Boolean procedure, rather like EndFile. It returns False as long as there are any non-space characters left in the File. It will skip any spaces, updating Image and Pos, until it finds a non-space or the end of the File. If it has reached the end, it returns True; if it finds non-space characters, it returns False.
 Example 7.4 is a word counting program which uses LastItem.
@@ -257,10 +257,10 @@ Example 7.4: Use of LastItem in word counting.
                    OutImage;
                    Words.Close
                 end
-###Item oriented input
+### Item oriented input
 
 Some procedures read in the sequence of characters in the real file as an item of a certain type. Most are described in {{ book.Chapter8 }}, but here are two useful ones.
-###InChar
+### InChar
 
 InChar is almost the same as Image.GetChar. It is a character procedure which returns the next character in the File. If the end of the current Image has been reached, i.e. Image.More returns False, InImage will be called and the first character in the new Image read.
 Since SIMULA specifies that a call on InImage once the last record of the real File has been read will place the ISO end of file character, !25!, as the first in Image. A call on InChar once the last character of the real file has been read will return this non-printing character and EndFile will then return True. If the end of the File has been reached, i.e. EndFile returns True, a call on InImage will cause a runtime error. We can rewrite our word counting program, using InChar to replace Image.GetChar, as shown in example 7.5.
@@ -315,7 +315,7 @@ Example 7.5: LastItem and InChar in word counting.
                    OutImage;
                    Words.Close
                 end
-###InText
+### InText
 
 InText is a text procedure, with a single, integer value parameter. Its result is a text containing the next N characters in the real file, where N is the value of its integer parameter. It may include characters from more than one record in the real file, calling InImage as necessary.
 Example 7.6 is a new line splitting program, using InText. Note that it assumes an input file with lines 132 characters long. Note also that it does not deal with blanks at the end of Image.
@@ -333,40 +333,40 @@ Example 7.6: Line splitting with InText.
                    end;
                    OldLines.Close
                 end
-###ImageFile class OutFile
+### ImageFile class OutFile
 
 OutFile is the output equivalent of InFile and so has some similar attributes and some which are the output equivalents of InFile's input attributes. Again, some will be left until chapter 8. EndFile and LastItem do not exist for OutFile, since they would have no meaning.
-###Image
+### Image
 
 The Image text of an OutFile is set up in the same way as that of an InFile. It is used to accumulate items which are to be output, until a call of OutImage or OutRecord writes the current line or record to the real file or device.
-###Open
+### Open
 
 Boolean procedure Open works in approximately the same way as for InFile, except that the real file or device is reserved for output, not input, and the real file may be created if it does not exist already. The text reference parameter is used as the initial Image, as in InFile.
-###IsOpen
+### IsOpen
 
 IsOpen works in exactly the same way as it does in InFile.
-###SetAccess
+### SetAccess
 
 SetAccess works in exactly the way as it does in InFile.
-###OutImage
+### OutImage
 
 When OutImage is called either, explicitly, from the program or, implicitly, by one of the item output routines like OutChar, the current contents of Image are written as a new record to the file or device connected to this OutFile.
 Image is then filled with spaces as if by
 
       Image :- Blanks (Image.Length);
-###OutRecord
+### OutRecord
 
 Procedure OutRecord works in a similar way to OutImage, but only writes out those characters preceding Pos in Image. Thus OutRecord can be used to create files with variable length records, where the operating system supports this.
 Older systems will not have OutRecord.
 
-###BreakOutImage
+### BreakOutImage
 
 Procedure BreakOutImage writes out the contents of Image in the same way as OutRecord, except that it does not produce any implicit line terminator. Thus successive calls of BreakOutImage will write a series of Images to the same line.
 It is intended to allow prompts to be displayed on interactive terminals, in a manner that allows input to be typed on the same line.
 
 Where an operating system does not support output without line terminators, BreakOutImage is exactly equivalent to OutRecord. Older systems will not have BreakOutImage.
 
-###Close
+### Close
 
 This procedure is the same as for InFile, except that, if the Image is non-empty at close, i.e. Image.Pos is not 1, there remain some unwritten characters. In this case, Open calls OutImage to write out the remaining record.
 Again, files will be closed automatically at the end of the program, although it is tidier and safer to close them in the program.
@@ -375,7 +375,7 @@ This means that the programs 7.7 a, b and c are equivalent.
 
 It is much safer to call OutImage and Close explicitly, when they are needed. Consider the effect of extending the program to do further writing to Out1, if you are depending on the end of the program to output the Image containing "SUCCESS".
 
-###CheckPoint
+### CheckPoint
 
 Boolean procedure CheckPoint is used to safeguard any output done so far. If it is called, the operating system is requested to complete all writing to the external file which may have been buffered or delayed before returning. If this is successful, CheckPoint returns true. If it fails or the operating system does not allow checkpointing, false is returned.
 Example 7.7a.
@@ -424,19 +424,19 @@ Example 7.7c.
                       COMMENT do not call OutImage;
                    end
                 end
-###SetPos, Pos, More and Length
+### SetPos, Pos, More and Length
 
 These are all exactly as for InFile, i.e. equivalent to Image.SetPos, Image.Pos, Image.More and Image.Length.
-###Item oriented output
+### Item oriented output
 
 Several attributes of OutFile are procedures which write out items of various types. Most are dealt with in chapter 8 , but here are the two which match those given for InFile.
-###OutChar
+### OutChar
 
 This procedure takes a single character value parameter. It writes this to the File. If there is space in the current Image, i.e. Image.More returns True, it is written by Image.PutChar, otherwise OutImage is first called and the character is then written as the first in the next record.
-###OutText
+### OutText
 
 This takes a single text value parameter. As with OutChar, if there is insufficient space in Image, OutImage is first called. The characters of the text are copied into Image as if by successive OutChar calls. Pos is thus increased. If the length of the text is greater than Image.Length a runtime error occurs.
-###Exercises
+### Exercises
 
 7.3 Write a program to remove double spaces from a whole file, producing a new file. Extend this to place a double space after each full stop.
 7.4 Write a program to remove blank lines from a file, producing a new file.

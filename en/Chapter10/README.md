@@ -1,8 +1,8 @@
-#Chapter 10 - Make me a list
+# Chapter 10 - Make me a list
 
-##Lists 1 - Arrays and simple linked lists
+## Lists 1 - Arrays and simple linked lists
 
-###Storing lists
+### Storing lists
 
 In setting exercises 9.3 and 9.4, I hoped to focus your attention on the need to hold lists in ways which are easy to access. Many programs need to read, update and write out long series of data items. These items are the objects which we wish to manipulate. It is rarely worthwhile to use a computer to process one or two items. Even our program which wrote only a few copies of one label used an object with a list of data items within it.
 The use of files allows us to read lists from outside the program and to store them at its end. Unfortunately, as our updating programs show, it is not a good idea to create a new file, external to the program, each time we add, delete or modify an item in a list. We soon end up with a multitude of out of date files.
@@ -11,7 +11,7 @@ The use of objects defined by classes allows us to hide a number of basic items 
 
 This chapter is the first of three dealing with the handling of lists. It provides simple but elegant mechanisms for solving most of the problems mentioned above. Let us start with the problem of holding a long list of items, which are all of the same type.
 
-###The letter program revisited
+### The letter program revisited
 
 The text of a letter can be represented as a list of SIMULA text objects, with a maximum number of characters in each. So far, the only way we have seen to hold them is as a list of text declarations, one for each line. This leads to a very long winded program and you probably confined your answer to exercise 9.3 to letters with only a few lines. A much simpler and more concise way of representing the same thing is to declare a single identifier, representing a numbered list of text references. Such an identifier represents an object known as an array of texts.
 Example 10.1 shows the use of an array in a much simplified letter program, where no addresses are allowed for, only the text and the name of the sender.
@@ -67,7 +67,7 @@ Example 10.1: Letter program using a text array.
          new Leter.WriteLetter
 
       end**of**program
-###Simple array declarations
+### Simple array declarations
 
 The syntax of an array declaration is the type specifier of the items in the list (integer, ref(Leter) etc.), followed by the keyword array, followed by an identifier, followed by the "bounds" of the list, enclosed in parentheses. Spaces (or ends of line) are used to separate keywords and identifiers as usual. They are not required between the identifier and the left parenthesis, but may be used if you wish.
 It is legal to omit the type specifier, in which case the array is asumed to be of type real.
@@ -84,7 +84,7 @@ Note that the value of the first bound does not have to be 1. The bounds can hav
 
 Note also that the values of the bounds may be given as real values. In this case they are converted to integers in the same way as for assignments. The values can be arithmetic expressions as well as constants. The normal rules for evaluating expressions apply.
 
-###Using array elements
+### Using array elements
 
 The items in an array list are often called its "elements". Example 10.1 shows how an individual element of Line can be accessed. This is known as a subscripted variable. The value within the parentheses is called the subscript or the index.
 Item number Len of the list is accessed in ReadLetter. It is referred to as Line(Len). Since Len is increased by one before each Image is copied to Line(Len) the effect is to copy successive lines of input into successive elements of the text array Line.
@@ -99,12 +99,12 @@ A subscripted variable may be used wherever a simple variable of the same type m
 
 The value of the subscript, converted to an integer if necessary, must lie between the values of the lower and upper bounds, inclusive. If it is outwith this range a runtime error will be reported.
 
-###Notes on differences amongst SIMULA systems
+### Notes on differences amongst SIMULA systems
 
 Some older SIMULA systems may require square brackets, [ and ], instead of parentheses, ( and ). Programs written for such machines may require changes to compile on up to date systems and vice versa. Some compilers will accept either form, which requires even greater care when moving programs.
 The lowest permitted value for the lower bound, the highest permitted value for the upper bound and the maximum total number of items permitted in an array are all likely to be different on different systems. The maximum number of elements in an array of one type may also be different from that of another type, even on the same system. Check the Programmers' Reference Manual or Users' Guide for the system you are using.
 
-###Variable length lists
+### Variable length lists
 
 Clearly the use of arrays allows large amounts of data to be held in locations declared within our programs, without the continual need to access files and without declaring long lists of identifiers. The use of loops, especially for loops, allows us to handle arrays in concise and clear ways.
 One problem with the use of arrays is that we must tell the system in their declarations how many elements they contain and what their bounds are. Often this may not be known until runtime. This means that example 10.1 can only cope with letters of up to sixty lines. If someone wanted to use the program for a longer letter, they would have to alter the source and recompile it.
@@ -174,7 +174,7 @@ Example 10.4: Dynamic array bounds in a class.
          if Cl1Ref.BoolArr(5) then OutText("True") else OutText("False");
          OutImage
       end**of**program
-###A more practical use of dynamic arrays
+### A more practical use of dynamic arrays
 
 Let us return to our general text processing system. It has been some time since we looked at it, but I hope the features introduced since then have been suggesting solutions to the problems we were facing. In particular, I hope the use of classes and object oriented programming has seemed relevant.
 This section shows how the combination of class objects and arrays can help the design of the Book level of our program. What we are going to try to do is to design a class Book, with the necessary data structures and procedures for manipulating them. Consider example 10.5.
@@ -272,7 +272,7 @@ Example 10.5: Class Book and the accompanying program block.
          OutImage;
          new Book(InInt)
       end**of**main**program
-###Top down again
+### Top down again
 
 Example 10.5 shows how object oriented programming makes top down design easier. Only the skeletons of the components of Book are provided, yet its own actions can be fully defined in terms of these. Actions to be performed on one component can be made into local procedures within the class corresponding to that component. The detail of how such procedures will work can be left until that class is itself considered in detail.
 This leads to the following description of top down, object oriented design.
@@ -281,14 +281,14 @@ The visible properties of each component are defined by the operation of the obj
 Even simpler is,
 Don't clutter up your program with unnecessary detail until you need it.
 
-###Exercises
+### Exercises
 
 10.1 Write a program which reads the names of a group of students and creates an array of pupil records, holding name, age, address and marks in maths, English and physics. Allow student details to be filled in in any order, copying the details into the correct entry in the array. Print out the contents in the order in which the list of names was first given.
 10.2 Extend 10.1 to sort the names into alphabetical order as it first reads them and to print the records in this order.
 
 10.3 Further extend your program to calculate each student's average mark and to print separate lists ordered alphabetically, by order of marks in each subject and by overall average mark.
 
-###Rearranging lists
+### Rearranging lists
 
 An array is an ordered list. Each item in the list is numbered and can be accessed by this number combined with the name of the array. This is very useful where the order is fixed or is irrelevant.
 Exercise 10.2 shows that it is often useful to be able to rearrange the order in which the items of a list are held. Exercise 10.3 takes this further and shows that the same items may need to be thought as being on several different lists, held in different orders. The array can only do this by clumsy rearrangement of its elements or by copying the same elements into a number of different arrays.
@@ -299,7 +299,7 @@ Once the correct position in the list has been found it is necessary to move all
 
 Fortunately, SIMULA allows us to create much more flexible lists, tailored to the needs of a program. These use the ability of class objects to contain pointers or links, in the form of reference variables, to other objects. Lists can be formed in this way, known as "linked lists".
 
-###Reading into a linked list
+### Reading into a linked list
 
 Diagram 10.1 shows how a new object is added to a linked list. Each object of class Linked\_Lab contains an attribute called Next, which is of type ref(Linked\_Lab). The corresponding program is shown in example 10.7.
 New objects are added to the end of this list. Pointers to the current first and last members of the list are held in the ref(Linked\_Lab) variables List\_Head and List\_End.
@@ -405,24 +405,24 @@ Example 10.7: Building the linked list in Diagram 10.1.
       end..of..printing..list
 
    end**of**program
-###Class reference comparison
+### Class reference comparison
 
 The final while loop of example 10.7 contained a class object reference comparison. This used the operator =/=, which means "does not reference" or "does not point at". Formally, it tests for reference inequality. It is similar to the text reference comparator.
 There is also a positive equivalent, ==, meaning "does reference", which tests for reference equality. Thus
 
       if P1==P2 then OutInt(3,3)
 would print 3 if the class object reference variables P1 and P2 pointed to the same object.
-###None
+### None
 
 The same comparison also used None as one of the reference variables. None is a reference to no object. Any reference variable initially references None. Any reference variable can be pointed back to None.
 Reference variables of any type can be pointed at None. It is the initial value of reference variables, regardless of their type.
 
-###Exercises
+### Exercises
 
 10.4 Extend example 10.7 to build a list of five objects.
 10.5 Write a program to add items to the start of a linked list, rather than the end, and which builds a list of four such items.
 
-###Generalising simple linked lists
+### Generalising simple linked lists
 
 In exercises 10.4 and 10.5 you will have noticed that for all items except the first, adding a new item to a linked list requires the same sequence of statements. There is a clear case for using procedures for such tasks.
 If we think further, a linked list is a data structure with attributes unique to itself. Each list has a head and a tail (although it is possible to use just a head). Furthermore, our proposed procedures for adding items at the beginning and end of a list operate only on attributes of a list object. It is sensible to define a class embodying these attributes for use in processing linked lists. Example 10.8 shows how this might be implemented.
@@ -497,21 +497,21 @@ Example 10.8: Class Label_List.
          end;
          OutImage
       end**of**program
-###Exercises
+### Exercises
 
 10.6 Write a program which locates and removes an item in a linked list.
 10.7 Add local procedures to class Linked_Lab, one of which inserts a label object after a given member of the list and one of which removes a label from the list.
 
 10.8 Rewrite your answers to 10.2 and 10.3 using linked lists instead of arrays. Remember that an object can have as many ref attributes as you like and so can be on as many linked lists simultaneously as you wish.
 
-###Arrays versus linked lists
+### Arrays versus linked lists
 
 We have seen that arrays are a very convenient way of storing simple values and references to more complex class objects in an ordered list. We have seen that rearranging such lists is very inconvenient. Although the use of dynamic bounds allows greater flexibility, the need to specify the overall size and bounds of an array at the start of the block in which it is declared still imposes quite strict limits to the usefulness of arrays.
 Linked lists are much easier to rearrange and to extend. We do not need to fix an upper limit to the number of elements in them. The same object can exist on several such lists at once. On the other hand, if we wish to find item number six, say, on a linked list, we must chain through, counting as we go. In an array accessing item number six is trivial.
 
 There are strengths and weaknesses in both these list structures. It is a question of picking the more appropriate one for your purposes. As we shall see later, linked lists can be even more flexible than those we have used so far and some of their limitations can be reduced. For certain very common purposes, however, arrays remain the best choice.
 
-###Summary
+### Summary
 
 We have seen how simple, ordered lists can be held in arrays. The means for declaring and accessing arrays have been learned, especially how to use subscripted variables to treat any item of an array as a simple variable of the same type.
 The use of dynamic bounds to allow variable sized arrays has been shown
